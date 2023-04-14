@@ -1,3 +1,1 @@
-export const environment = {
-    baseApi: "https://fakestoreapi.com/"
-};
+export const environment = {};

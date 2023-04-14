@@ -5,6 +5,8 @@ import { SharedRoutingModule } from './shared-routing.module';
 import { HeaderComponent } from './components/header/header.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SelectComponent } from './components/select/select.component';
 
@@ -17,12 +19,14 @@ import { SelectComponent } from './components/select/select.component';
   imports: [
     CommonModule,
     SharedRoutingModule,
+    FormsModule,
     HttpClientModule
   ],
   exports: [
     HeaderComponent,
     SpinnerComponent,
-    SelectComponent
+    SelectComponent,
+    FormsModule
   ]
 })
 export class SharedModule { }

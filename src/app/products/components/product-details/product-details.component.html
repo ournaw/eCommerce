@@ -1,1 +1,23 @@
-<p>product-details works!</p>
+<!-- ********** spinner ********** -->
+<div class="d-flex justify-content-center align-items-center" style='height : 400px' *ngIf="loading">
+    <app-spinner></app-spinner>
+</div>
+<!-- ********** product ********** -->
+<div class="box" *ngIf="!loading">
+    <div class="row">
+        <div class="col-md-5 col-sm-12">
+            <img src="{{product.image}}" alt="">
+        </div>
+        <div class="col-md-7 col-sm-12">
+            <ul class="list-unstyled">
+                <li>Title : {{product.title}}</li>
+                <li>Category : {{product.category}}</li>
+                <li>Description : {{product.description}}</li>
+                <li>Rate : {{product.rating.rate}}</li>
+                <li>Count : {{product.rating.count}}</li>
+                <li>Price : {{product.price}}</li>
+            </ul>
+        </div>
+
+    </div>
+</div>

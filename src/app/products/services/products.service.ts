@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +19,9 @@ export class ProductsService {
 
   getProductsByCategory(category: string) {
     return this.http.get(environment.baseApi + 'products/category/' + category)
+  }
+
+  getProductById(id: number) {
+    return this.http.get(environment.baseApi + 'products/' + id)
   }
 }
