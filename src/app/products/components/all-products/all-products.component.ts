@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
+import { product } from '../../models/product';
 
 @Component({
   selector: 'app-all-products',
@@ -8,7 +9,7 @@ import { ProductsService } from '../../services/products.service';
 })
 export class AllProductsComponent implements OnInit {
 
-  products: any[] = []
+  products: product[] = []
   categories: any[] = []
   loading: boolean = false
   cart: any[] = []
