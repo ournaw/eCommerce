@@ -14,4 +14,8 @@ export class AdminService {
     myParams = myParams.append('startDate', params?.start).append('endDate', params?.end)
     return this.http.get(environment.baseApi + 'carts', { params: myParams })
   }
+
+  deleteCart(id: any) {
+    return this.http.delete(environment.baseApi + 'carts/' + id)
+  }
 }

@@ -1,4 +1,4 @@
-<label class="mb-2">{{label}} : </label>
+<label>{{label}} : </label>
 <select class="form-control" (change)="onChange($event)">
     <option value="all" selected>All</option>
     <option *ngFor="let option of options" value="{{option}}">{{option}}</option>

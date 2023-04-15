@@ -1,0 +1,79 @@
+<div class="card px-3 pt-3 m-3">
+
+    <div class="card-header mb-2 d-flex justify-content-between align-items-center">
+        <h5>Products List</h5>
+        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Add
+            Product</button>
+    </div>
+
+    <div class="card-body">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Gategory</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of products">
+                    <img src="{{product.image}}" alt="" style="width: 100px; height: 100px;">
+                    <td>{{product.title}}</td>
+                    <td>{{product.category}}</td>
+                    <td>{{product.price}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+<!-- ************** Modal ***************** -->
+<div class="modal modal-lg fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">ADD NEW PRODUCT</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form" [formGroup]="newProductForm">
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="">Title</label>
+                            <input type="text" class="form-control" formControlName="title">
+                        </div>
+                        <div class="col-4">
+                            <label for="">Price</label>
+                            <input type="number" class="form-control" formControlName="price">
+                        </div>
+                        <div class="col-4">
+                            <app-select [label]="'Categories'" [options]="categories"
+                                (selectedValue)="getSelectedValue($event)"></app-select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="">Image</label>
+                            <input class="form-control" type="file" (change)="getImagePath($event)">
+                            <div class="d-flex justify-content-center">
+                                <div class="company-header-avatar" style="background-image: url({{base64}})"></div>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <label for="">Description</label>
+                            <textarea class="form-control" rows="6" formControlName="description"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" [disabled]="!newProductForm.valid" (click)="addNewProduct()">Add product</button>
+            </div>
+        </div>
+    </div>
+</div>

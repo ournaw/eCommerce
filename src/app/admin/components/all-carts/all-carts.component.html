@@ -29,10 +29,47 @@
                 <td>{{cart.date | date: 'dd/MM/yyyy hh:mm:ss a'}}</td>
                 <td>{{cart.products.length}}</td>
                 <td>
-                    <button class="btn btn-primary">View</button>
-                    <button class="btn btn-danger">Delete</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        (click)="getCart(cart)">View</button>
+                    <button class="btn btn-danger" (click)="deleteCart(cart.id)">Delete</button>
                 </td>
             </tr>
         </tbody>
     </table>
+</div>
+
+
+<!-- Modal -->
+<div class="modal modal-lg fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">CART Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- *********** products ************ -->
+                <div class="row border-top border-bottom" *ngFor="let item of viewCart.products">
+                    <div class="row main align-items-center">
+                        <div class="col-md-1"><img class="img-fluid" src="{{item.product.image}}"></div>
+                        <div class="col">
+                            {{item.product.title}}
+                        </div>
+                        <div class="col d-flex justify-content-end align-items-center">
+                            {{item.product.price}} x {{item.quantity}}
+                        </div>
+                        <div class="col d-flex align-items-center justify-content-end">
+                            {{item.product.price * item.quantity}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="col d-flex align-items-center justify-content-between m-4 p-2" style="background-color: rgba(160, 160, 160,0.2); border-radius: 3px;">
+                    <span>Total : </span>
+                    <span>{{total}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

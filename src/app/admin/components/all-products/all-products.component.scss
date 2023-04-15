@@ -1,0 +1,14 @@
+.company-header-avatar{
+    width: 100px;
+    height: 100px;
+    -webkit-border-radius: 100px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 100px;
+    -moz-background-clip: padding;
+    border-radius: 100px;
+    background-clip: padding-box;
+    margin: 15px 0 0 5px;
+    float: left;
+    background-size: cover;
+    background-position: center center;
+}

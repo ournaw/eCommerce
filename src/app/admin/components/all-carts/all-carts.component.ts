@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CartsService } from 'src/app/carts/services/carts.service';
 import { AdminService } from '../../services/admin.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ProductsService } from 'src/app/products/services/products.service';
+import { product } from 'src/app/products/models/product';
 
 @Component({
   selector: 'app-all-carts',
@@ -11,9 +12,11 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class AllCartsComponent implements OnInit {
 
   carts: any[] = []
+  viewCart: any = {}
+  total: number = 0
   dateForm!: FormGroup
 
-  constructor(private service: AdminService, private builder: FormBuilder) {
+  constructor(private adminService: AdminService, private productService: ProductsService, private builder: FormBuilder) {
     this.dateForm = this.builder.group({
       start: [''],
       end: ['']
@@ -25,16 +28,46 @@ export class AllCartsComponent implements OnInit {
   }
 
   getAllCarts() {
-    this.service.getAllCarts().subscribe((res: any) => {
+    this.adminService.getAllCarts().subscribe((res: any) => {
       this.carts = res
     })
   }
 
   applyFilter() {
     let params = this.dateForm.value
-    this.service.getAllCarts(params).subscribe((res: any) => {
+    this.adminService.getAllCarts(params).subscribe((res: any) => {
       this.carts = res
     })
+  }
+
+  deleteCart(id: any) {
+    this.adminService.deleteCart(id).subscribe(res => {
+      console.log(res)
+    })
+  }
+
+  getCart(cart: any) {
+
+    this.total = 0
+
+    this.viewCart = {
+      id: cart.id,
+      userId: cart.userId,
+      date: cart.date,
+      products: []
+    }
+
+    for (let i = 0; i < cart.products.length; i++) {
+
+      const id = cart.products[i].productId
+      const quantity = cart.products[i].quantity
+
+      this.productService.getProductById(id).subscribe((res: any) => {
+        this.viewCart.products.push({ product: res, quantity: quantity })
+        this.total += res.price * quantity
+      })
+    }
+
   }
 
 }
